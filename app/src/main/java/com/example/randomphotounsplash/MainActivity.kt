@@ -13,7 +13,7 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private lateinit var buttonNext: Button
-    val itemsList: ArrayList<String> = ArrayList()
+    val itemsList: ArrayList<ArrayList<String>> = ArrayList()
     private lateinit var customAdapter: Adapter
     private lateinit var recyclerView: RecyclerView
 
@@ -36,12 +36,22 @@ class MainActivity : AppCompatActivity() {
     private fun nextImageLoad() {
        retrofitVar.getNextImage().enqueue(object : Callback<Photos> {
             override fun onResponse(call: Call<Photos>, response: Response<Photos>) {
+                val oneItemList : ArrayList<String>  = ArrayList()
                 var responseImage = response.body()?.urls?.regular
+                var responseLikes = response.body()?.likes.toString()
+                var responseDescription = response.body()?.description
+                var responseAltDescription = response.body()?.alt_description
                 if (responseImage != null) {
-                    itemsList.add(responseImage)
+                    oneItemList.add(responseImage)
+                }
+                    if (responseDescription != null) {
+                        oneItemList.add(responseDescription)
+                    } else
+                            oneItemList.add(responseAltDescription!!)
+                    oneItemList.add(responseLikes)
+                    itemsList.add(oneItemList)
                     customAdapter.notifyDataSetChanged()
                 }
-            }
 
             override fun onFailure(call: Call<Photos>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "There is an error", Toast.LENGTH_SHORT).show()
