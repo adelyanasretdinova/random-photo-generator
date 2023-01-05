@@ -12,26 +12,23 @@ import org.w3c.dom.Text
 import java.util.Objects
 
 
-class Adapter(private var itemsList: ArrayList<Photos>) :
+class Adapter() :
+
     RecyclerView.Adapter<Adapter.ViewHolder>() {
+
+    var itemsList: ArrayList<Photos> = ArrayList()
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView
-
-        init {
-            imageView = view.findViewById(R.id.imageView)
-        }
-
         val textDescr: TextView
-
-        init {
-            textDescr = view.findViewById(R.id.textDescr)
-        }
-
         val likes: TextView
 
         init {
+            imageView = view.findViewById(R.id.imageView)
+            textDescr = view.findViewById(R.id.textDescr)
             likes = view.findViewById(R.id.likes)
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
