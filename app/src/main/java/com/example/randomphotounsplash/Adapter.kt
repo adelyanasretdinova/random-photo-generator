@@ -24,12 +24,10 @@ class Adapter(private var itemsList: ArrayList<String>): RecyclerView.Adapter<Ad
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d("TAG999", "${itemsList[position]}")
                 Glide
                     .with(holder.itemView.context)
                     .load(itemsList[position])
                     .into(holder.imageView)
-//        holder.imageView.setImageResource(android.R.drawable.arrow_up_float)
 
     }
 
