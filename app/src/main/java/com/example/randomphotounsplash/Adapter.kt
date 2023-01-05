@@ -9,9 +9,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import org.w3c.dom.Text
+import java.util.Objects
 
 
-class Adapter(private var itemsList: ArrayList<ArrayList<String>>) :
+class Adapter(private var itemsList: ArrayList<Photos>) :
     RecyclerView.Adapter<Adapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView
@@ -42,12 +43,11 @@ class Adapter(private var itemsList: ArrayList<ArrayList<String>>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Glide
             .with(holder.itemView.context)
-            .load(itemsList[position][0])
+            .load(itemsList[position].urls.regular)
             .into(holder.imageView)
-        holder.textDescr.text = itemsList[position][1]
-        holder.likes.text = itemsList[position][2]
+        holder.textDescr.text = itemsList[position].description ?: itemsList[position].alt_description
+        holder.likes.text = itemsList[position].likes.toString()
     }
-
 
     override fun getItemCount(): Int {
         return itemsList.size
