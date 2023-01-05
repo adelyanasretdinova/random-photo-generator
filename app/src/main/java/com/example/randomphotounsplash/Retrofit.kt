@@ -6,10 +6,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object Retrofit {
 
-    const val BASE_URL = "https://api.unsplash.com/"
+    private const val BASE_URL = "https://api.unsplash.com/"
 
 
-    val retrofit = Retrofit.Builder()
+    val retrofit= Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
