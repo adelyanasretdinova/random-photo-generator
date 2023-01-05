@@ -14,7 +14,6 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
     private lateinit var buttonNext: Button
     val itemsList: ArrayList<Photos> = ArrayList()
-    val regularL:ArrayList<Regular> = ArrayList()
     private lateinit var customAdapter: Adapter
     private lateinit var recyclerView: RecyclerView
 
@@ -37,16 +36,10 @@ class MainActivity : AppCompatActivity() {
     private fun nextImageLoad() {
        retrofitVar.getNextImage().enqueue(object : Callback<Photos> {
             override fun onResponse(call: Call<Photos>, response: Response<Photos>) {
-//                var responseImage = response.body()?.urls?.regular
-//                var responseDescription = response.body()?.description
-//                var responseLikes = response.body()?.likes
-//                var responseAltDescription = response.body()?.alt_description
-//                Photos(responseImage, responseLikes,responseDescription, responseAltDescription)
 
                 var responseData = response.body()
                 if (responseData != null) {
                     itemsList.add(Photos(responseData.urls, responseData.likes, responseData.description,responseData.alt_description))
-                    Log.d("TAG9999", "$itemsList")
                 }
 
                 customAdapter.notifyDataSetChanged()
