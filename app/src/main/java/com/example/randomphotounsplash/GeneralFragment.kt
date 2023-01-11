@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.randomphotounsplash.databinding.FragmentGeneralBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,30 +23,24 @@ class GeneralFragment : Fragment() {
     private lateinit var buttonNext: Button
     private val customAdapter: Adapter = Adapter()
     private lateinit var recyclerView: RecyclerView
+    private lateinit var binding: FragmentGeneralBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_general, container, false)
+        binding = FragmentGeneralBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        buttonNext = view.findViewById<Button>(R.id.buttonNext)
-
-        buttonNext.setOnClickListener {
+        binding.buttonNext.setOnClickListener{
             nextImageLoad()
         }
-
-
-
-        recyclerView = view.findViewById<RecyclerView>(R.id.imagesManyView)
-        recyclerView.adapter = customAdapter
-
+        binding.imagesManyView.adapter = customAdapter
 
         customAdapter.onItemClick = { Photos ->
             val bundle = Bundle()

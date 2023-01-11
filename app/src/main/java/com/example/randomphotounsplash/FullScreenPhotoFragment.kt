@@ -8,24 +8,26 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.example.randomphotounsplash.databinding.FragmentFullScreenPhotoBinding
 
 class FullScreenPhotoFragment : Fragment() {
+    private lateinit var binding: FragmentFullScreenPhotoBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_full_screen_photo, container, false)
+        binding = FragmentFullScreenPhotoBinding.inflate(inflater,container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       val fullScreenPhoto = view.findViewById<ImageView>(R.id.fullScreenPhotoFragment)
 
         Glide
             .with(this)
             .load(getArguments()?.getString("url"))
-            .into(fullScreenPhoto)
+            .into(binding.fullScreenPhotoFragment)
     }
 }

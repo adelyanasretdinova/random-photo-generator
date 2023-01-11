@@ -6,6 +6,10 @@ plugins {
 android {
     namespace 'com.example.randomphotounsplash'
     compileSdk 32
+    viewBinding.enabled = true
+    buildFeatures {
+        viewBinding = true
+    }
 
     defaultConfig {
         applicationId "com.example.randomphotounsplash"
