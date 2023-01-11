@@ -47,10 +47,6 @@ class GeneralFragment : Fragment() {
         recyclerView.adapter = customAdapter
 
 
-//                val navHostFragment =
-//        supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-//    val navController = navHostFragment.navController
-
         customAdapter.onItemClick = { Photos ->
             val bundle = Bundle()
             bundle.putString("url", Photos.urls.regular)
