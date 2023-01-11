@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import org.w3c.dom.Text
@@ -17,8 +18,9 @@ class Adapter() :
     RecyclerView.Adapter<Adapter.ViewHolder>() {
 
     var itemsList: ArrayList<Photos> = ArrayList()
+    var onItemClick: ((Photos) -> Unit)? = null
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+   inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView
         val textDescr: TextView
         val likes: TextView
@@ -27,8 +29,12 @@ class Adapter() :
             imageView = view.findViewById(R.id.imageView)
             textDescr = view.findViewById(R.id.textDescr)
             likes = view.findViewById(R.id.likes)
-        }
 
+            imageView.setOnClickListener{
+               onItemClick?.invoke(itemsList[adapterPosition])
+            }
+
+    }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -42,8 +48,11 @@ class Adapter() :
             .with(holder.itemView.context)
             .load(itemsList[position].urls.regular)
             .into(holder.imageView)
-        holder.textDescr.text = itemsList[position].description ?: itemsList[position].alt_description
+        holder.textDescr.text =
+            itemsList[position].description ?: itemsList[position].alt_description
         holder.likes.text = itemsList[position].likes.toString()
+
+
     }
 
     override fun getItemCount(): Int {
